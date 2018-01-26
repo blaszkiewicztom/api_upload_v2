@@ -13,9 +13,6 @@ class UIController extends Controller
 {
     /**
      * @Route("/upload", name="upload")
-     * <3 Forma w abstrakcji, czyli la fabstractina le formule <3
-     *                     <3 (^.^) <3
-     *
      */
     public function uploadAction(Request $request)
     {
