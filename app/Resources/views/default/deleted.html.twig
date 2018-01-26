@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <ul class="nav justify-content-center nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('active') }}">Active</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Deleted</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('upload') }}">Upload</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            {% for deletedImage in deletedImages %}
+                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12">
+                    <div class="card p-3">
+                        <img class="card-img-top img-fluid" style="max-height: 240px" src="{{ asset('images/') }}{{ deletedImage.fileName }}" alt="Image">
+                        <div class="card-block">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">{{ deletedImage.description }}</p>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Buttons">
+                            <a href="{{ path('api_restore',{'id' : deletedImage.id} ) }}" class="btn btn-secondary" role="button">Restore</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

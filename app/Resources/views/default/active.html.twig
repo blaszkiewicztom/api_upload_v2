@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <ul class="nav justify-content-center nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Active</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('deleted') }}">Deleted</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('upload') }}">Upload</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        <br>
+        {% for msg in app.session.flashbag.get('file_deleted_successfully') %}
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-success" role="alert">
+                        {{ msg }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% for msg in app.session.flashbag.get('file_restored_successfully') %}
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-success" role="alert">
+                        {{ msg }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% for msg in app.session.flashbag.get('file_uploaded_successfully') %}
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-success" role="alert">
+                        {{ msg }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+            <div class="row">
+                {% for activeImage in activeImages %}
+                    <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12">
+                        <div class="card p-3">
+                            <img class="card-img-top img-fluid" style="max-height: 240px" src="{{ asset('images/') }}{{ activeImage.fileName }}" alt="Image">
+                            <div class="card-block">
+                                <h4 class="card-title">Card title</h4>
+                                <p class="card-text">{{ activeImage.description }}</p>
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Buttons">
+                                <a href="{{ path('api_download',{'id' : activeImage.id} ) }}" class="btn btn-secondary" role="button">Download</a>
+                                <a href="{{ path('api_delete',{'id' : activeImage.id} ) }}" class="btn btn-secondary" role="button">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
+
+{% endblock %}
+
+
